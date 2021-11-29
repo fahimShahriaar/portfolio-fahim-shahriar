@@ -13,6 +13,37 @@
             height: 100vh;
             background-color: #0a192f;
             color: lightgrey;
+            overflow: hidden;
+        }
+
+        span {
+            position: absolute;
+            pointer-events: none;
+            background: lightgray;
+            animation: animate 5s linear infinite;
+        }
+
+        .mainDiv {
+            height: 100vh;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: scale(0) translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1) translateY(-500%) rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -56,7 +87,7 @@
         </div>
     </header>
 
-    <main class="flex w-full">
+    <main id="mainDiv" class="flex w-full">
         <!-- left nav -->
         <nav class="w-16 flex flex-col items-center justify-center" style="height: 90vh">
             <a href="https://www.linkedin.com/in/fahim-nwu/" target="_blank"><i
@@ -66,7 +97,7 @@
         <!-- main section -->
         <section class="w-full grid grid-cols-1 md:grid-cols-2">
             <div class="flex justify-center items-center">
-                <img src="./images/rounded-2.png" class="w-2/4 md:my-0 my-4" alt="">
+                <img src="./images/rounded-2.png" class="w-2/5 md:my-0 my-4" alt="">
             </div>
             <div class="flex items-center">
                 <div class="px-6">
@@ -93,6 +124,41 @@
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <!-- demo end -->
+
+    <script>
+        const colors = [
+            "#2196f3",
+            "#e91e63",
+            "#fae957",
+            "lightGray"
+        ]
+        // "#ffeb3b",
+        // "#74ff1d",
+        function createSquare() {
+            const mainDiv = document.getElementById('mainDiv');
+            const square = document.createElement('span');
+
+            var size = Math.random() * 5;
+
+            square.style.width = 20 + size + 'px';
+            square.style.height = 20 + size + 'px';
+
+            square.style.top = Math.random() * innerHeight + 'px';
+            square.style.left = Math.random() * innerWidth + 'px';
+
+            const bg = colors[Math.floor(Math.random() * colors.length)];
+            square.style.background = bg;
+
+            mainDiv.appendChild(square);
+
+            setTimeout(() => {
+                square.remove()
+            }, 5000)
+
+        }
+
+        setInterval(createSquare, 150)
+    </script>
 </body>
 
 </html>
